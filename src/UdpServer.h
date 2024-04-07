@@ -69,7 +69,7 @@ public:
 
         WakeOnLan wakeOnLan = WakeOnLan(_udpService);
 
-        _logger.LogInline("Sending Wake on Lan magic packet on the broadcast address");
+        _logger.LogInline("Sending Wake on Lan magic packet on the broadcast address ");
         _logger.Log(broadcastAddress.toString());
 
         wakeOnLan.setBroadcastAddress(broadcastAddress);

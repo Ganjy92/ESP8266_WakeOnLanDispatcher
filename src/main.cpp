@@ -62,6 +62,11 @@ void loop()
   _logger.LogInline("Requested a wake on Lan packet for ");
   _logger.Log(String(receivedMacAddress.c_str()));
 
-  if( receivedMacAddress.compare(WiFi.macAddress().c_str()) )
-    _logger.Log("MAC Match, a valid request has been processed!");
+  if (!receivedMacAddress.compare(WiFi.macAddress().c_str()))
+    return;
+
+  _logger.Log("MAC Match, a valid request has been processed, broadcasting to subnet!");
+
+  //Setting here the mac addresses to wake up
+  _udpServerService.SendWakeOnLan(IPAddress(192,168,1,255),"D8:BB:C1:9D:81:C3");
 }
