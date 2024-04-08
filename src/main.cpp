@@ -8,8 +8,8 @@
 #define WIFI_PASS "casaRossatti"
 
 //LED
-#define NOTIFICATION_LED = 5;
-LedNotifier _ledNotification = LedNotifier();
+int _notificationLed = 2;
+LedNotifier _ledNotification = LedNotifier(_notificationLed,true);
 
 // Log
 Logger _logger = Logger();
@@ -20,6 +20,7 @@ UdpServer _udpServerService = UdpServer(_logger);
 
 void setup()
 {
+  _ledNotification.Disable();
   // put your setup code here, to run once:
   _logger.Log("Starting...");
 
