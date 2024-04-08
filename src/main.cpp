@@ -1,14 +1,19 @@
-#include <Arduino.h>
 #include <ESP8266WiFi.h>
 
 #include "UdpServer.h"
+#include "LedNotifier.h"
 
 // Set WiFi credentials
 #define WIFI_SSID "Vodafone-A70678530"
 #define WIFI_PASS "casaRossatti"
 
+//LED
+#define NOTIFICATION_LED = 5;
+LedNotifier _ledNotification = LedNotifier();
+
 // Log
 Logger _logger = Logger();
+
 
 // UDP variables
 UdpServer _udpServerService = UdpServer(_logger);
@@ -38,6 +43,8 @@ void setup()
   _logger.Log(WiFi.macAddress());
 
   _udpServerService.Start();
+  _ledNotification.Enable();
+
 }
 
 void loop()
@@ -46,6 +53,7 @@ void loop()
   if (!_udpServerService.ParsePacket())
   {
     delay(1000);
+    _ledNotification.Enable();
     return;
   }
 
@@ -69,4 +77,7 @@ void loop()
 
   //Setting here the mac addresses to wake up
   _udpServerService.SendWakeOnLan(IPAddress(192,168,1,255),"D8:BB:C1:9D:81:C3");
-}
+
+  _ledNotification.BlinkFor(5,200);
+
+}     
