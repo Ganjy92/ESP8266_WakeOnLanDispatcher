@@ -20,7 +20,7 @@ UdpServer _udpServerService = UdpServer(_logger);
 
 void setup()
 {
-  _ledNotification.Disable();
+  _ledNotification.Enable();
   // put your setup code here, to run once:
   _logger.Log("Starting...");
 
@@ -44,7 +44,7 @@ void setup()
   _logger.Log(WiFi.macAddress());
 
   _udpServerService.Start();
-  _ledNotification.Enable();
+
 
 }
 
@@ -53,8 +53,9 @@ void loop()
   // put your main code here, to run repeatedly:
   if (!_udpServerService.ParsePacket())
   {
-    delay(1000);
-    _ledNotification.Enable();
+    delay(2000);
+    _ledNotification.BlinkFor(4,500);
+    _ledNotification.Disable();
     return;
   }
 
