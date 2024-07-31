@@ -4,8 +4,8 @@
 #include "LedNotifier.h"
 
 // Set WiFi credentials
-#define WIFI_SSID "Vodafone-A70678530"
-#define WIFI_PASS "casaRossatti"
+#define WIFI_SSID "XXXXXX"
+#define WIFI_PASS "XXXXXX"
 
 //LED
 int _notificationLed = 2;
